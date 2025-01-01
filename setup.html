@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Setup</title>
+  <link rel="stylesheet" href="css/style.css" media="screen">
+</head>
+<body>
+  <div id="setup-container" >
+    <br><br><br>
+	<div class="resultText" id="event-desc">Settings</div><br><br>
+    <div id="setup" style="width: 100%; text-align: center;">
+	    <br><br><br>
+		<div class="setupText">6 or 8 Lane Pool?</div>
+		<br><br>
+		<div class="setupText">Exhibition Lanes?</div>
+		<br><br>
+		<div class="setupText">Individual Points</div>
+		<br><br>
+		<div class="setupText">Relay Points</div>
+		<br><br>
+		<div class="setupText">Home Team Name (7 Char Max)</div>
+		<br><br>
+		<div class="setupText">Visiting Team Name (7 Char Max)</div>
+	    <br><br><br>
+		<button class="button-lane" id="menu-button" style='min-width: 250px;'>Back</button>
+		<br>
+		<div class='footnote' id="footerText1"></div>
+	</div>
+  </div>
+  <script>
+	const buttons = document.querySelectorAll('#setup-container button');
+	const menuButton = document.getElementById('menu-button');
+
+	buttons.forEach(button => {
+	  button.addEventListener('click', () => {
+		
+		if ( button === menuButton ) {
+		  window.location = 'index.html';
+		  return;
+		} 
+	
+	  });
+	});
+  </script>
+</body>
+</html>

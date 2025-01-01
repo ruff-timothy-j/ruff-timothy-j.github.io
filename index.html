@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swim Meet Event Calculator</title>
+  <link rel="stylesheet" href="css/style.css" media="screen">
+</head>
+<body>
+  <div id="home-container" >
+    <br><br><br>
+    <div id="home">
+	    <div class="resultText" id="event-desc">Main Menu</div><br><br>
+		<br><br><br><br>
+		<button class="button-lane" id="meet-button" style='min-width: 450px;' >Score Meet</button><br><br><br><br>
+		<button class="button-lane" id="race-button" style='min-width: 450px;'>Score Individual Event</button><br><br><br><br>
+		<button class="button-lane" id="relay-button" style='min-width: 450px;'>Score Relay Event</button><br><br><br><br>
+		<button class="button-lane" id="dive-button" style='min-width: 450px;'>Score Diving Event</button><br><br><br><br>
+		<button class="button-lane" id="setup-button" style='min-width: 450px;'>Settings</button><br><br><br><br>
+		<button class="button-lane" id="about-button" style='min-width: 450px;'>About</button><br>
+		<br><br><br>
+		<br><br><br>
+		<br><br><br><br>
+		<div class='setupText' id="footerText1">Prototype Version 0.4</div>
+		<div class='setupText' id="footerText1">Mobile Phone Target View</div>
+		<div class='setupText' id="footerText1">ruff-timothy-j.github.io</div>
+	</div>
+  </div>
+  <script>
+	const buttons = document.querySelectorAll('#home-container button');
+	const meetButton = document.getElementById('meet-button');
+	const raceButton = document.getElementById('race-button'); 
+	const relayButton = document.getElementById('relay-button'); 
+	const diveButton = document.getElementById('dive-button'); 
+	const setupButton = document.getElementById('setup-button');
+
+	buttons.forEach(button => {
+	  button.addEventListener('click', () => {
+		
+		if ( button === meetButton ) {
+		  window.location = 'meet.html';
+		  return;
+		  
+		} else if ( button === raceButton ) {
+		  window.location = 'race-calculator.html?iEventMode=1&iCompetitionMode=1';
+		  return; 
+		  
+		} else if ( button === relayButton ) {
+		  window.location = 'race-calculator.html?iEventMode=2&iCompetitionMode=1';
+		  return; 
+		  
+		} else if ( button === diveButton ) {
+		  window.location = 'race-calculator.html?iEventMode=3&iCompetitionMode=1';
+		  return; 
+		  
+		} else if ( button === setupButton ) {
+		  window.location = 'setup.html';
+		  return; 
+		  
+		}
+		
+	  });
+	});
+  </script>
+</body>
+</html>

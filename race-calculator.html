@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swim Meet Race Score Calculator</title>
+  <link rel="stylesheet" href="css/style.css" media="screen">
+</head>
+<body>
+  <div id="score-container" >
+    <br><br><br>
+    <div id="keypad">
+		<div id="race-description">
+			<div class="resultText" id="event-desc">Individual</div>
+			<div class="setupText" id="event-detail"></div><br><br>
+		</div>
+		<div id="race-order-definition">
+			<button class="button-lane" id="1-button">1</button>&nbsp;&nbsp;
+			<button class="button-lane" id="2-button">2</button>&nbsp;&nbsp;
+			<button class="button-lane" id="3-button">3</button>&nbsp;&nbsp;
+			<button class="button-lane" id="4-button">4</button>&nbsp;&nbsp;
+			<button class="button-lane" id="5-button">5</button>&nbsp;&nbsp;
+			<button class="button-lane" id="6-button">6</button>&nbsp;&nbsp;
+			<button class="button-lane" id="7-button">7</button>&nbsp;&nbsp;
+			<button class="button-lane" id="8-button">8</button>
+		</div>
+			<div id="race-description">
+			<br><br>
+			<div class="finishOrder">
+			<div class="resultHeader">Finish Order</div>
+			<div class="resultCriticalText" id="eligibleorder"></div>
+			<div class="resultText" id="allorder"></div>
+			</div>
+			<div class="scoreGroup">
+			<div class="resultHeader" id="hometeamheader">Home Team (Even)</div>
+			<div class="resultText" id="homeorder"></div>
+			<div class="resultText" id="homeresult"></div>
+			<div class="resultText" id="hometotal"></div>
+			</div>
+			<div class="scoreGroup">
+			<div class="resultHeader" id="visitteamheader">Visiting Team (Odd)</div>
+			<div class="resultText" id="visitororder"></div>
+			<div class="resultText" id="visitorresult"></div>
+			<div class="resultText" id="visitortotal"></div>
+			</div>
+			<br><br><br><br><br><br>
+		</div>
+		<div id="race-actions">
+			<button class="button-lane" id="menu-button" style='min-width: 160px;' >Back</button>&nbsp;&nbsp;
+			<button class="button-lane" id="undo-button" style='min-width: 160px;'>Undo</button>&nbsp;&nbsp;
+			<button class="button-lane" id="dq-button" style='min-width: 160px;'>DQ</button>&nbsp;&nbsp;
+			<button class="button-lane" id="reset-button" style='min-width: 160px;' >Reset</button>&nbsp;&nbsp;
+			<button class="button-lane" id="save-button" style='min-width: 160px;' >Save</button>
+			<br><br><br>
+		</div>
+		<div id="race-footnotes">
+			<div class='footnote' id="footerText1"></div>
+			<div class='footnote' id="footerTextX"></div>
+			<div class='footnote' id="footerText2"></div>
+			<div class='footnote' id="footerText3"></div>
+			<div class='footnote' id="footerText4"></div>
+			<div class='footnote' id="footerText5"></div>
+		</div>
+	</div>
+  </div>
+  <script src="js/race-calculator.js"></script>
+</body>
+</html>
+</html>

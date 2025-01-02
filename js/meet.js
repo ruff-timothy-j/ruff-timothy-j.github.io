@@ -4,6 +4,19 @@ const menuButton = document.getElementById('menu-button');
 const meetButton = document.getElementById('meet-button');
 const resetButton = document.getElementById('reset-button');
 
+// get the stored descriptions of the home and visiting teams
+var sHomeTeamName = "Home";
+if (localStorage.getItem('HomeTeamName') !== null) {
+	// Key exists, so lets load it into memory before display. 
+	sHomeTeamName = localStorage.getItem('HomeTeamName');
+}
+
+var sVisitTeamName = "Visitor";
+if (localStorage.getItem('VisitTeamName') !== null) {
+	// Key exists, so lets load it into memory before display. 
+	sVisitTeamName = localStorage.getItem('VisitTeamName');
+}
+
 const header = [
   { Girls_Header: 'Girls', Event_Header: '', Boys_Header: 'Boys' }
  ]
@@ -104,11 +117,11 @@ function createTableFromArray(data , iHeaderOnly) {
 	  
 	  if (key.includes( 'Home' )) {
 		  // sub header home 
-		  key = 'Home';
+		  key = sHomeTeamName;
 		  th.style = 'width: 15%'
 	  } else if (key.includes( 'Visitor' )) {
 		  // sub header visitor  
-		  key = 'Visitor';
+		  key = sVisitTeamName;
 		  th.style = 'width: 15%'
 	  } else if (key.includes( 'Event_Header' )) {
 		  // header gender

@@ -63,13 +63,17 @@ var sEventName = queryParams.get('sEventName');
 sEventName = ( sEventName == null ) ? '' : sEventName;
 sEventDescription += ( sEventDescription.length > 0 ) ? sEventName : ''; 
 
-
 // Pool Configuration 
 // 1 = 8 Lanes, 1 and 8 exhibition
 // 2 = 8 Lanes 
 // 3 = 6 Lanes
 var iPoolMode = 1; 
 var iTotalLanes = 8;
+
+if (localStorage.getItem('PoolMode') !== null) {
+	// Key exists, so lets load it into memory before display. 
+	iPoolMode = localStorage.getItem('PoolMode');
+} 
  
 if ( iPoolMode == 1 ) {
 	// 1 = 8 Lanes, 1 and 8 exhibition
@@ -100,13 +104,11 @@ if ( iPoolMode == 1 ) {
 // 2 = Save for Meet
 var iCompetitionMode = queryParams.get('iCompetitionMode');
 iCompetitionMode = ( iCompetitionMode == null ) ? 1 : iCompetitionMode;
-
 if ( iCompetitionMode == 1 ) {
 	// We don't need to save the scores if we ae only scoreing an individual race.
 	// remove the save button 
 	document.getElementById( 'save-button' ).remove(); 
 }
-
 
 // Event Type (query Parameter)
 // 1 = Individual Only 
@@ -117,7 +119,7 @@ iEventMode = ( iEventMode == null ) ? 1 : iEventMode;
 
 if ( iEventMode == 1 ) {
 	eventdesc.textContent = 'Individual Event';
-	footnote1.textContent = 'Points are awarded as 6-4-3-2-1-0. ' + sLaneInstruction;
+	
 	footnote2.textContent = 'Click on swim lane buttons in the order the competitors finish.';
 	
 } else if ( iEventMode == 2 ) {
@@ -136,10 +138,6 @@ if ( iEventMode == 1 ) {
 	// Make sure we have no Exhibition lanes
 	aNoPointLanes = caAllOpenLanes.slice();
 	aExhibitionLanes = caAllOpenLanes.slice();
-	
-	// Odds and evens don't really have meaning here
-	homehead.textContent = 'Home Team';
-	visithead.textContent = 'Visiting Team';
 		
 	// Change the lane titles to home and away
 	for (var iLane = 1; iLane <= iTotalLanes; iLane++) {
@@ -153,6 +151,23 @@ if ( iEventMode == 1 ) {
 	}	
 }
 
+// get the stored descriptions of the home and visiting teams
+var sHomeTeamName = "Home";
+if (localStorage.getItem('HomeTeamName') !== null) {
+	// Key exists, so lets load it into memory before display. 
+	sHomeTeamName = localStorage.getItem('HomeTeamName');
+}
+
+var sVisitTeamName = "Visitor";
+if (localStorage.getItem('VisitTeamName') !== null) {
+	// Key exists, so lets load it into memory before display. 
+	sVisitTeamName = localStorage.getItem('VisitTeamName');
+}
+
+// Odds and evens don't really have meaning here
+homehead.textContent = sHomeTeamName + ' Team (even lanes)';
+visithead.textContent = sVisitTeamName + ' Team (odd lanes)';
+
 footnote3.textContent = 'Undo rolls back the previous click.';
 footnote4.textContent = 'DQ toggles to allow a second click on a lane to disqualify the competitor.';
 if ( iCompetitionMode == 1 ) {
@@ -163,7 +178,6 @@ if ( iCompetitionMode == 1 ) {
 
 // this is typically only defined if coming from the meet progression page
 eventdetail.textContent = sEventDescription; 
-
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
@@ -309,29 +323,29 @@ function persistEvent ( ipEventMode, ipEventNumber, ipGender  ) {
 	if ( ipEventMode == 1 ) {
 		// Individual (home)
 		iHTeamPoints = scoreTeam( aOverallPlace, caIndividualPoints, aNoPointLanes, 0, 1 );
-		console.log('Invidual Home = ' + iHTeamPoints);  
+		console.log('Individual ' + sHomeTeamName + ' = ' + iHTeamPoints);  
 		
 		// visitor 
 		iVTeamPoints = scoreTeam( aOverallPlace, caIndividualPoints, aNoPointLanes, 1, 1 );
-		console.log('Invidual Visitor = ' + iVTeamPoints); 
+		console.log('Individual ' + sVisitTeamName + ' = ' + iVTeamPoints); 
 
 	} else if ( ipEventMode == 2 ) {
 		// Relay (home)
 		iHTeamPoints = scoreTeamRelay( aOverallPlace, caRelayPoints, aNoPointLanes, 0, 1 );
-		console.log('Relay Home = ' + iHTeamPoints);  
+		console.log('Relay ' + sHomeTeamName + ' = ' + iHTeamPoints);  
 		
 		// visitor
 		iVTeamPoints = scoreTeamRelay( aOverallPlace, caRelayPoints, aNoPointLanes, 1, 1 );
-		console.log('Relay Visitor = ' + iVTeamPoints); 
+		console.log('Relay ' + sVisitTeamName + ' = ' + iVTeamPoints); 
 	
 	} else if ( ipEventMode == 3 ) {
 		// Diving  (home)
 		iHTeamPoints = scoreTeam( aOverallPlace, caIndividualPoints, aNoPointLanes, 0, 1 );
-		console.log('Diving Home = ' + iHTeamPoints);  
+		console.log('Diving ' + sHomeTeamName + ' = ' + iHTeamPoints);  
 		
 		// visitor
 		iVTeamPoints = scoreTeam( aOverallPlace, caIndividualPoints, aNoPointLanes, 1, 1 );
-		console.log('Diving Visitor = ' + iVTeamPoints);  
+		console.log('Diving ' + sVisitTeamName + ' = ' + iVTeamPoints);  
 	} 
 	
 	

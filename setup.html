@@ -9,38 +9,84 @@
     <br><br><br>
 	<div class="resultText" id="event-desc">Settings</div><br><br>
     <div id="setup" style="width: 100%; text-align: center;">
-	    <br><br><br>
-		<div class="setupText">6 or 8 Lane Pool?</div>
-		<br><br>
-		<div class="setupText">Exhibition Lanes?</div>
-		<br><br>
-		<div class="setupText">Individual Points</div>
-		<br><br>
-		<div class="setupText">Relay Points</div>
-		<br><br>
-		<div class="setupText">Home Team Name (7 Char Max)</div>
-		<br><br>
-		<div class="setupText">Visiting Team Name (7 Char Max)</div>
-	    <br><br><br>
-		<button class="button-lane" id="menu-button" style='min-width: 250px;'>Back</button>
+		<div class="setupText">Pool Lane Utilization</div><br>
+		<select name="poolmode" id="poolmode" style="font-size: 50px;">
+			<optgroup style="font-size: 15px;text-align: left;">
+				<option value="1">6 competition + 2 exhibition lanes</option>
+				<option value="3">6 competition lanes</option>
+				<option value="2">8 competition lanes</option>
+			</optgroup>
+		</select>
+		<br><br><br><br>
+		<div class="setupText">Home Team Name (even lanes)</div>
 		<br>
-		<div class='footnote' id="footerText1"></div>
+		<input type="text" id="hometeam" name="hometeam" maxlength="6" style="font-size: 50px; width: 250px" value="home"></input>
+		<br><br><br><br>
+		<div class="setupText">Visiting Team Name (odd lanes)</div>
+		<br>
+		<input type="text" id="visitteam" name="visitteam" maxlength="6" style="font-size: 50px; width: 250px"></input>
+	    <br><br><br><br><br><br><br>
+		<button class="button-lane" id="menu-button" style='min-width: 250px;'>Back</button>
+		<br><br><br><br>
+		<div class='footnote' id="footerText1">Team names are limited to 6 characters.</div>
 	</div>
   </div>
   <script>
 	const buttons = document.querySelectorAll('#setup-container button');
 	const menuButton = document.getElementById('menu-button');
+	const poolmode = document.getElementById('poolmode');
+	const hometeam = document.getElementById('hometeam');
+	const visitteam = document.getElementById('visitteam');
 
+	// get the stored pool mode
+	var iPoolMode = 1; 
+	if (localStorage.getItem('PoolMode') !== null) {
+		// Key exists, so lets load it into memory before display. 
+		iPoolMode = localStorage.getItem('PoolMode');
+		poolmode.value = iPoolMode;
+	} 
+
+	// get the stored descriptions of the home and visiting teams
+	var sHomeTeamName = "Home";
+	if (localStorage.getItem('HomeTeamName') !== null) {
+		// Key exists, so lets load it into memory before display. 
+		sHomeTeamName = localStorage.getItem('HomeTeamName');
+		hometeam.value = sHomeTeamName;
+	}
+
+	var sVisitTeamName = "Visitor";
+	if (localStorage.getItem('VisitTeamName') !== null) {
+		// Key exists, so lets load it into memory before display. 
+		sVisitTeamName = localStorage.getItem('VisitTeamName');
+		visitteam.value = sVisitTeamName;
+	}
+	
 	buttons.forEach(button => {
 	  button.addEventListener('click', () => {
 		
 		if ( button === menuButton ) {
-		  window.location = 'index.html';
-		  return;
+
+		  	// write the current state of the teams names to long term storage
+			sHomeTeamName = hometeam.value;
+			sVisitTeamName = visitteam.value;
+
+			localStorage.setItem( 'HomeTeamName', ( sHomeTeamName.length > 0 ? sHomeTeamName : "Home" ) );
+			localStorage.setItem( 'VisitTeamName',( sVisitTeamName.length > 0 ? sVisitTeamName : "Visitor" ) );
+		  	window.location = 'index.html';
+		  	return;
 		} 
 	
 	  });
 	});
+
+	poolmode.addEventListener('change', function() {
+  		// Get the selected value
+  		iPoolMode = this.value;
+
+  		// write the pool mode back to long term storage.
+		localStorage.setItem('PoolMode', iPoolMode);
+	});
+
   </script>
 </body>
 </html>
